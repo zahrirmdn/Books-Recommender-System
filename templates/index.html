@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Books Recommender System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <!-- Header -->
+    <h1>Books Recommender System</h1>
+
+    <!-- Form Input -->
+    <form method="POST" action="/">
+        <label for="book-title">Enter Book Title:</label>
+        <input type="text" id="book-title" name="book_title" placeholder="Enter a book title" required>
+        <button type="submit">Get Recommendations</button>
+    </form>
+
+    <!-- Recommendations Section -->
+    <div class="recommendations-container">
+        {% if recommendations_tfidf %}
+            <ul>
+                {% for book in recommendations_tfidf %}
+                    <li>{{ book }}</li>
+                {% endfor %}
+            </ul>
+        {% elif book_title %}
+            <!-- Show this message only if search has been made but no recommendations found -->
+            <p class="no-recommendations">No recommendations available.</p>
+        {% endif %}
+    </div>
+
+
+</body>
+</html>
